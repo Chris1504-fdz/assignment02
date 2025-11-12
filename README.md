@@ -119,6 +119,19 @@ CUDA_VISIBLE_DEVICES=0,2,3 torchrun --nproc_per_node=3 dbpedia_lora_finetune.py 
 CUDA_VISIBLE_DEVICES=0,2,3 torchrun --nproc_per_node=3 --master_port=29600 dbpedia_llama_eval.py --total_samples 500 --batch_size 16 --output_dir output
 ```
 
+The commands above capture the exact workflow used to fine-tune and evaluate the model for this assignment. The LoRA adapter was fine-tuned specifically for DBpedia14 entity classification, where the goal is to map short Wikipedia-style articles into one of 14 predefined categories (such as Company, Artist, Film, etc.). All training and evaluation was performed on the Northwestern vision GPU cluster using 3 GPUs in parallel.
+
+## LoRA fine-tuning.
+The model meta-llama/Llama-3.2-1B-Instruct was trained on 5,000 examples from the DBpedia training split for 3 epochs. Only a small set of low-rank LoRA parameters was updated, allowing the model to specialize toward DBpedia’s categories while keeping the base weights frozen. This produced the adapter saved under ./lora_output/final_adapter.
+
+## Base vs LoRA comparison.
+After fine-tuning, the base model and the LoRA-adapted model were evaluated side-by-side on 500 held-out test examples. This command generates the confusion matrices and accuracy comparison shown in the report.
+
+## Final evaluation of the LoRA model.
+The LoRA adapter was then evaluated on a separate 500-example subset of DBpedia test data to produce the detailed metrics, macro/weighted scores, and sample predictions included in the analysis section.
+
+All three commands were run with torchrun using distributed data parallel (DDP) with GPUs 0, 2, and 3, ensuring consistent reproducibility and efficient multi-GPU training. These commands allow anyone with access to the model and cluster to reproduce the fine-tuning, evaluation, and metrics reported in this project.
+
 # Sample Outputs and Discussion – DBpedia14 Classification
 
 ## 1. Task and Models

@@ -17,6 +17,7 @@ To run this project, you must:
 export HUGGING_FACE_HUB_TOKEN="hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 # 2) Build the Docker image (once)
+cd assignment02
 docker build -t lora-demo .
 
 # 3) Run the project

@@ -13,8 +13,7 @@ To run this project, you must:
 
 - The token should have “Read” permissions.
 
-# 1) Set your Hugging Face token (replace with your own)
-export HUGGING_FACE_HUB_TOKEN="hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+# 1) Set your Hugging Face token (by requesting to the Huggin Face provided link for "meta" model
 
 # 2) Build the Docker image (once)
 cd assignment02

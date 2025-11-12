@@ -1,6 +1,7 @@
 import os
 os.environ["TRANSFORMERS_VERBOSITY"] = "error"
 LORA_DIR = os.getenv("LORA_DIR", "./lora_output/final_adapter")
+print(f"[quick_demo] Using LoRA adapter at: {LORA_DIR}")
 import random
 import torch
 import difflib

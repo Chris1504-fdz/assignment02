@@ -1,5 +1,6 @@
 import os
 os.environ["TRANSFORMERS_VERBOSITY"] = "error"
+LORA_DIR = os.getenv("LORA_DIR", "./lora_output/final_adapter")
 import random
 import torch
 import difflib
@@ -13,13 +14,13 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 # Config
 # -----------------------------
 MODEL_ID = "meta-llama/Llama-3.2-1B-Instruct"
-LORA_DIR = "./lora_output/final_adapter"  # path to your trained LoRA adapter
+# LORA_DIR = "./lora_output/final_adapter"  # path to your trained LoRA adapter
 EXCLUDE_INDICES_FILE = "./output/finetune_original_indices.txt"
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 SAMPLE_INDICES = [2783, 4816]   # specific test indices you care about
-N_CM_EXAMPLES = 100             # small subset for quick confusion matrix
+N_CM_EXAMPLES = 20             # small subset for quick confusion matrix
 
 # -----------------------------
 # DBpedia label set

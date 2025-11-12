@@ -20,7 +20,7 @@ export HUGGING_FACE_HUB_TOKEN="hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 docker build -t lora-demo .
 
 # 3) Run the project
-docker run --rm -e HUGGING_FACE_HUB_TOKEN="$HUGGING_FACE_HUB_TOKEN" -v $HOME/.cache/huggingface:/root/.cache/huggingface --shm-size=2g --gpus all lora-demo
+ docker run --rm -e HUGGING_FACE_HUB_TOKEN="$HUGGING_FACE_HUB_TOKEN" --shm-size=2g lora-demo
 ## Overview
 
 This project fine-tunes a pretrained language model using LoRA (Low-Rank Adaptation) through the PEFT

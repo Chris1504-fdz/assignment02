@@ -92,7 +92,7 @@ def main():
     batch_size = 2
     epochs = 1
     learning_rate = 2e-4
-    total_samples = 200
+    total_samples = 20
     seed = 123
 
     set_random_seed(seed)
@@ -151,8 +151,11 @@ def main():
     base_kwargs = dict(
         output_dir=output_dir,
         overwrite_output_dir=True,
-        save_strategy="no",   # no epoch checkpoints needed for unit test
-        logging_steps=10,
+        save_strategy="no",
+        # 👇 log more often
+        logging_strategy="steps",
+        logging_steps=1,
+        logging_first_step=True,
         num_train_epochs=epochs,
         per_device_train_batch_size=batch_size,
         gradient_accumulation_steps=1,
@@ -161,7 +164,7 @@ def main():
         weight_decay=0.0,
         fp16=torch.cuda.is_available(),
         save_total_limit=1,
-        report_to="none",
+        report_to="none",   # keeps it printing to stdout
     )
 
     try:

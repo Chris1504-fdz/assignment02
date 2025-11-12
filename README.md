@@ -1,4 +1,26 @@
 # Assignment 2 – LoRA Fine-Tuning with PEFT
+## Access Requirement
+
+This project uses the model meta-llama/Llama-3.2-1B-Instruct, which is gated on Hugging Face
+
+To run this project, you must:
+- Have a Hugging Face account.
+
+- Visit the model page and click “Request Access” (approval may take a few minutes).
+
+- Generate a personal access token at https://huggingface.co/settings/tokens
+
+
+- The token should have “Read” permissions.
+
+# 1) Set your Hugging Face token (replace with your own)
+export HUGGING_FACE_HUB_TOKEN="hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+# 2) Build the Docker image (once)
+docker build -t lora-demo .
+
+# 3) Run the project
+docker run --rm -e HUGGING_FACE_HUB_TOKEN="$HUGGING_FACE_HUB_TOKEN" -v $HOME/.cache/huggingface:/root/.cache/huggingface --shm-size=2g --gpus all lora-demo
 ## Overview
 
 This project fine-tunes a pretrained language model using LoRA (Low-Rank Adaptation) through the PEFT

@@ -8,7 +8,7 @@ ENV PYTHONUNBUFFERED=1 \
     HF_HUB_ENABLE_HF_TRANSFER=0
 
 # Optional: default LoRA dir (can be overridden at runtime)
-ENV LORA_DIR=/app/lora_output_unit/final_adapter
+ENV LORA_DIR=/app/lora_output/final_adapter
 
 # ===== App files =====
 WORKDIR /app
@@ -29,7 +29,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 # This injects `import os` at the top (if missing) and replaces any hard-coded LORA_DIR
 # with an env-aware line that defaults to ./lora_output_unit/final_adapter
 RUN sed -i '1iimport os' quick_demo.py && \
-    sed -i 's#^LORA_DIR *= *\".*\"#LORA_DIR = os.getenv("LORA_DIR", "./lora_output/final_adapter")#' quick_demo.py
+    sed -i 's#^LORA_DIR *= *\".*\"#LORA_DIR = os.getenv("LORA_DIR", "/app/lora_output/final_adapter")#' quick_demo.py
 
 # ===== Simple entrypoint: tiny LoRA train, then the quick demo =====
 RUN printf '%s\n' \
